@@ -58,7 +58,7 @@ CSceneManager::~CSceneManager(void)
 void CSceneManager::Init()
 {
 	// Blue background
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
@@ -79,7 +79,7 @@ void CSceneManager::Init()
 	// Get a handle for our uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 	//m_parameters[U_MODEL] = glGetUniformLocation(m_programID, "M");
-	//m_parameters[U_VIEW] = glGetUniformLocation(m_programID, "V");
+	m_parameters[U_INVERSE_VIEW] = glGetUniformLocation(m_programID, "iV");
 	m_parameters[U_MODELVIEW] = glGetUniformLocation(m_programID, "MV");
 	m_parameters[U_MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(m_programID, "MV_inverse_transpose");
 	m_parameters[U_MATERIAL_AMBIENT] = glGetUniformLocation(m_programID, "material.kAmbient");
@@ -330,7 +330,7 @@ void CSceneManager::Init()
 		GM->G.push_back(g);
 	}
 
-	for (int i = 0; i < 500; ++i)
+	/*for (int i = 0; i < 500; ++i)
 	{ 
 		ai* g = new ai();
 		g->t.Set(0, 0, 0);
@@ -338,8 +338,7 @@ void CSceneManager::Init()
 		g->rad = 3 * 10;
 		g->m = GEO_CONE;
 		GM->G.push_back(g);
-	}
-	
+	}*/
 }
 
 void CSceneManager::Update(double dt)
@@ -877,13 +876,14 @@ void CSceneManager::Render()
 	viewStack.LookAt(	camera.position.x, camera.position.y, camera.position.z,
 						camera.target.x, camera.target.y, camera.target.z,
 						camera.up.x, camera.up.y, camera.up.z );
+	glUniformMatrix4fv(m_parameters[U_INVERSE_VIEW], 1, GL_FALSE, &viewStack.Top().GetInverse().a[0]);
 
 	// Model matrix : an identity matrix (model will be at the origin)
 	modelStack.LoadIdentity();
 
 	RenderLights();
-	RenderGround();
-	RenderSkybox();
+	//RenderGround();
+	//RenderSkybox();
 	RenderFixedObjects();
 	RenderMobileObjects();
 

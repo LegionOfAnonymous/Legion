@@ -67,6 +67,7 @@ void main(){
 		if(colorTextureEnabled == true)
 		{
 			materialColor = texture2D( colorTexture, texCoord );
+			materialColor *= vec4(1,0,0,1);
 		}
 		else
 		{
