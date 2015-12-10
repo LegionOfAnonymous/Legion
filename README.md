@@ -1,5 +1,4 @@
 # Legion
-We Do Not Forgive, We Do Not Forget
 
 We are Anonymous. 
 We are Legion. 
