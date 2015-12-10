@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{78a69225-fe6f-4174-b4c6-ada9c7bd7b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game State Management">
+      <UniqueIdentifier>{38accbf7-7a83-441c-a6f1-f4b21139181b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{ba70c4e6-c4c3-430a-8a41-5cc23f5f1c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneGraph">
+      <UniqueIdentifier>{4aef9641-1ae7-45f6-ae9c-9b4b6379555e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spatial Partition">
+      <UniqueIdentifier>{fb8db345-6744-4035-9fef-07b8485cf718}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy_Kill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TreasureChest.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Goodies.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GoodiesFactory.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minimap.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerInfo.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayInfo3PV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameStateManager.cpp">
+      <Filter>Game State Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IntroState.cpp">
+      <Filter>Game State Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MenuState.cpp">
+      <Filter>Game State Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayState.cpp">
+      <Filter>Game State Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager2D.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneIntro.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneMenu.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneNode.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Model.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Node.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transform.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Grid.cpp">
+      <Filter>Spatial Partition</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpatialPartition.cpp">
+      <Filter>Spatial Partition</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GObj.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GManager.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ai.cpp">
+      <Filter>SceneGraph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy_Kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Goodies.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GoodiesFactory.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TreasureChest.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Minimap.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerInfo.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayInfo3PV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameState.h">
+      <Filter>Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManager.h">
+      <Filter>Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IntroState.h">
+      <Filter>Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MenuState.h">
+      <Filter>Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayState.h">
+      <Filter>Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager2D.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneIntro.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneMenu.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Node.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneNode.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transform.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Grid.h">
+      <Filter>Spatial Partition</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpatialPartition.h">
+      <Filter>Spatial Partition</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GObj.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GManager.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ai.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Texture.fragmentshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\Texture.vertexshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\Text.fragmentshader">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>

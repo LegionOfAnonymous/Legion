@@ -1,0 +1,5 @@
+/ipch/
+/.vs/
+*.opensdf
+*.sdf
+*.suo
