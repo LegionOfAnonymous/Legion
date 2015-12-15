@@ -61,6 +61,7 @@ uniform sampler2D colorTexture;
 uniform bool textEnabled;
 uniform vec3 textColor;
 uniform mat4 iV;
+uniform bool sp;
 
 void main(){
 	if(lightEnabled == true)
@@ -72,9 +73,12 @@ void main(){
 			materialColor = texture2D( colorTexture, texCoord );
 		else
 			materialColor = vec4( fragmentColor, 1 );
-
+		
+		
 		vec4 worldpos = iV * vec4(vertexPosition_cameraspace, 1);
 
+		if (sp)
+		{
 		if (worldpos.x > 0)
 			materialColor = vec4(1,0,0,1);
 		else
@@ -82,6 +86,7 @@ void main(){
 
 		if (worldpos.z > 0)
 			materialColor.g = 1;
+		}
 
 		// Vectors
 		vec3 eyeDirection_cameraspace = - vertexPosition_cameraspace;

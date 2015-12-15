@@ -116,7 +116,7 @@ void CSceneManager::Init()
 	// Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
-	
+	m_parameters[U_SPATIAL] = glGetUniformLocation(m_programID, "sp");
 	// Use our shader
 	glUseProgram(m_programID);
 
@@ -203,20 +203,8 @@ void CSceneManager::Init()
 	m_cMinimap->SetBorder( MeshBuilder::GenerateMinimapBorder("MINIMAPBORDER", Color(1, 1, 0), 1.f) );
 	m_cMinimap->SetAvatar( MeshBuilder::GenerateMinimapAvatar("MINIMAPAVATAR", Color(1, 1, 0), 1.f) );
 
-	m_cSceneGraph = new CSceneNode(); 
-	CModel* newModel = new CModel();
-	newModel->Init(MeshBuilder::GenerateCube("cube", Color(1, 0, 0), 10));
-	CTransform* newTransform = new CTransform();
-	newTransform->SetTranslate(200, 5, 200);
-	cout << m_cSceneGraph->SetNode(newTransform, newModel) << endl;
-
-	newModel = new CModel();
-	newModel->Init(MeshBuilder::GenerateCube("cube", Color(0, 1, 0), 10));
-	newTransform = new CTransform(0, 10, 0);
-	int id = m_cSceneGraph->AddChild(newTransform, newModel);
-	newTransform = new CTransform(0, 0, 0);
-	newTransform->SetRotate(45,0, 1, 0);
-	m_cSceneGraph->GetNode(id)->AddTransformation(newTransform);
+	CModel* newModel;
+	CTransform* newTransform;
 
 	GLuint texture = LoadTGA("Image//surgeon.tga", GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	Mesh* Body = MeshBuilder::GenerateOBJ("Body", "OBJ//Body.obj"); Body->textureID = texture;
@@ -297,16 +285,6 @@ void CSceneManager::Init()
 	m_cAvatar = new CPlayInfo3PV();
 	m_cAvatar->SetModel(sNode);
 
-	m_cSpatialPartition = new CSpatialPartition();
-	m_cSpatialPartition->Init(100, 100, 3, 3);
-	for (int i = 0; i < m_cSpatialPartition->GetxNumOfGrid(); ++i)
-	for (int j = 0; j < m_cSpatialPartition->GetyNumOfGrid(); ++j)
-	{
-		m_cSpatialPartition->SetGridMesh(i, j, MeshBuilder::GenerateQuad("Grid", Color(1.0f / i, 0, 1.0f / j), 100));
-	}
-	m_cSpatialPartition->PrintSelf();
-	m_cSpatialPartition->AddObject(m_cSceneGraph);
-
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	Mtx44 perspective;
 	perspective.SetToPerspective(70.0f, 16.0f / 9.0f, 0.1f, 10000.0f);
@@ -339,55 +317,26 @@ void CSceneManager::Init()
 		g->m = GEO_CONE;
 		GM->G.push_back(g);
 	}*/
+
+	m_cSpatialPartition = new CSpatialPartition();
+	m_cSpatialPartition->player = m_cAvatar;
+	m_cSpatialPartition->GM = GM;
+	m_cSpatialPartition->Init(100, 100, 3, 3);
+	for (int i = 0; i < m_cSpatialPartition->GetxNumOfGrid(); ++i)
+		for (int j = 0; j < m_cSpatialPartition->GetyNumOfGrid(); ++j)
+		{
+			m_cSpatialPartition->SetGridMesh(i, j, MeshBuilder::GenerateQuad("Grid", Color(1.0f / i, 0, 1.0f / j), 100));
+		}
+	m_cSpatialPartition->PrintSelf();
+	m_cSpatialPartition->AddObject(m_cSceneGraph);
 }
 
 void CSceneManager::Update(double dt)
 {
-	if(Application::IsKeyPressed('1'))
-		glEnable(GL_CULL_FACE);
-	if(Application::IsKeyPressed('2'))
-		glDisable(GL_CULL_FACE);
-	if(Application::IsKeyPressed('3'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if(Application::IsKeyPressed('4'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
-	if(Application::IsKeyPressed('5'))
-	{
-		lights[0].type = Light::LIGHT_POINT;
-		glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	}
-	else if(Application::IsKeyPressed('6'))
-	{
-		lights[0].type = Light::LIGHT_DIRECTIONAL;
-		glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	}
-	else if(Application::IsKeyPressed('7'))
-	{
-		lights[0].type = Light::LIGHT_SPOT;
-		glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	}
-	else if(Application::IsKeyPressed('8'))
-	{
-		bLightEnabled = true;
-	}
-	else if(Application::IsKeyPressed('9'))
-	{
-		bLightEnabled = false;
-	}
-
-	if(Application::IsKeyPressed('I'))
-		lights[0].position.z -= (float)(10.f * dt);
-	if(Application::IsKeyPressed('K'))
-		lights[0].position.z += (float)(10.f * dt);
-	if(Application::IsKeyPressed('J'))
-		lights[0].position.x -= (float)(10.f * dt);
-	if(Application::IsKeyPressed('L'))
-		lights[0].position.x += (float)(10.f * dt);
-	if(Application::IsKeyPressed('O'))
-		lights[0].position.y -= (float)(10.f * dt);
-	if(Application::IsKeyPressed('P'))
-		lights[0].position.y += (float)(10.f * dt);
+	if(Application::IsKeyPressed('R'))
+		glUniform1i(m_parameters[U_SPATIAL], true);
+	else
+		glUniform1i(m_parameters[U_SPATIAL], false);
 
 	rotateAngle -= Application::camera_yaw;// += (float)(10 * dt);
 
@@ -416,7 +365,6 @@ void CSceneManager::Update(double dt)
 		q = false;
 
 	GM->Update(dt);
-
 	m_cSpatialPartition->Update();
 
 	elapsedTime += dt;
@@ -693,9 +641,6 @@ void CSceneManager::RenderMobileObjects()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 
-	m_cSceneGraph->Draw(this);
-	m_cAvatar->theAvatarMesh->Draw(this);
-
 	//modelStack.PushMatrix();
 	//modelStack.Translate(0,0,0);
 	//RenderMesh(m_cAvatar->theAvatarMesh->GetModel()->GetMesh(), false);
@@ -884,8 +829,12 @@ void CSceneManager::Render()
 	RenderLights();
 	//RenderGround();
 	//RenderSkybox();
-	RenderFixedObjects();
-	RenderMobileObjects();
+	//RenderFixedObjects();
+	//RenderMobileObjects();
+
+	if (m_cSceneGraph)
+		m_cSceneGraph->Draw(this);
+	m_cAvatar->theAvatarMesh->Draw(this);
 
 	for (auto& g : GM->G)
 	{

@@ -106,6 +106,18 @@ void CPlayInfo3PV::SetJumpspeed(int jumpspeed)
 	this->jumpspeed = jumpspeed;
 }
 
+void CPlayInfo3PV::AddPosition(Vector3 position)
+{
+	curPosition += position;
+	theAvatarMesh->ApplyTranslate(0, position.x, position.y, position.z);
+}
+
+void CPlayInfo3PV::SetPosition(Vector3 position)
+{
+	Vector3 dir = curPosition - position;
+	AddPosition(dir);
+}
+
 // Stop the player's movement
 void CPlayInfo3PV::SetToStop(void)
 {
@@ -333,6 +345,10 @@ void CPlayInfo3PV::Update(double dt)
 	curPosition += velocity * dt;
 	theAvatarMesh->ApplyTranslate(0, velocity.x * dt, velocity.y * dt, velocity.z * dt);
 
+	curPosition += knockback * dt;
+	theAvatarMesh->ApplyTranslate(0, knockback.x * dt, knockback.y * dt, knockback.z * dt);
+	knockback += -knockback  * dt * 10;
+
 	if (HorizontalVelocity.LengthSquared() > 10 * 10)
 		velocity += -HorizontalVelocity.Normalized() * 1200 * dt;
 	else
@@ -404,6 +420,10 @@ void CPlayInfo3PV::ResetLimbs(const double dt)
 			steps = 0;
 	}
 
+}
+void CPlayInfo3PV::Knockback(Vector3 dir)
+{
+	knockback += dir;
 }
 /********************************************************************************
 Yaw. You can add in a deadzone here.

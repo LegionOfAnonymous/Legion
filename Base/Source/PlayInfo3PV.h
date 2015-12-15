@@ -41,7 +41,8 @@ public:
 	void SetPos_z(int pos_y);	
 	// Set Jumpspeed of the player
 	void SetJumpspeed(int jumpspeed);
-
+	void AddPosition(Vector3 position);
+	void SetPosition(Vector3 position);
 	// Update Movements
 	void MoveFrontBack(const bool mode, const float timeDiff);
 	void MoveLeftRight(const bool mode, const float timeDiff);
@@ -87,12 +88,14 @@ public:
 	void AnimateLimbs(const float legAngle = 40, const float armAngle = 40);
 	void ResetLimbs(const double dt);
 
+	void Knockback(Vector3 dir);
 private:
 	// Hero's information
 	Vector3 curPosition;
 	Vector3 curDirection;
 	Vector3 camDirection;
 	Vector3 velocity;
+	Vector3 knockback;
 	int jumpspeed;
 	float steps;
 

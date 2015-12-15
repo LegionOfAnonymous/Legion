@@ -1,5 +1,7 @@
 #include "SpatialPartition.h"
 #include "stdio.h"
+#include "GManager.h"
+#include "GObj.h"
 
 /********************************************************************************
  Constructor
@@ -106,28 +108,31 @@ void CSpatialPartition::SetGridMesh(const int xIndex, const int yIndex, Mesh* th
  ********************************************************************************/
 void CSpatialPartition::AddObject(CSceneNode* theObject)
 {
-	// Get the indices of the 2 values of each position
-	int index_topleft_x = ((int) theObject->GetTopLeft().x / (xSize*xNumOfGrid));
-	int index_topleft_z = ((int) theObject->GetTopLeft().z / (ySize*yNumOfGrid));
-	int index_bottomright_x = ((int) theObject->GetBottomRight().x / (xSize*xNumOfGrid));
-	int index_bottomright_z = ((int) theObject->GetBottomRight().z / (ySize*yNumOfGrid));
-
-	// Calculate the index of each position
-	int index_topleft = index_topleft_x*yNumOfGrid + index_topleft_z;
-	int index_bottomright = index_bottomright_x*yNumOfGrid + index_bottomright_z;
-
-	// Add them to each grid
-	if ((index_topleft>=0) && (index_topleft<xNumOfGrid*yNumOfGrid))
+	if (theObject)
 	{
-		theGrid[ index_topleft ].AddObject( theObject ); 
-	}
+		// Get the indices of the 2 values of each position
+		int index_topleft_x = ((int)theObject->GetTopLeft().x / (xSize*xNumOfGrid));
+		int index_topleft_z = ((int)theObject->GetTopLeft().z / (ySize*yNumOfGrid));
+		int index_bottomright_x = ((int)theObject->GetBottomRight().x / (xSize*xNumOfGrid));
+		int index_bottomright_z = ((int)theObject->GetBottomRight().z / (ySize*yNumOfGrid));
 
-	// if part of the object is in another grid, then add it in as well.
-	if ((index_bottomright>=0) && (index_bottomright<xNumOfGrid*yNumOfGrid))
-	{
-		if (index_topleft != index_bottomright)
+		// Calculate the index of each position
+		int index_topleft = index_topleft_x*yNumOfGrid + index_topleft_z;
+		int index_bottomright = index_bottomright_x*yNumOfGrid + index_bottomright_z;
+
+		// Add them to each grid
+		if ((index_topleft >= 0) && (index_topleft < xNumOfGrid*yNumOfGrid))
 		{
-			theGrid[ index_bottomright ].AddObject( theObject );
+			theGrid[index_topleft].AddObject(theObject);
+		}
+
+		// if part of the object is in another grid, then add it in as well.
+		if ((index_bottomright >= 0) && (index_bottomright < xNumOfGrid*yNumOfGrid))
+		{
+			if (index_topleft != index_bottomright)
+			{
+				theGrid[index_bottomright].AddObject(theObject);
+			}
 		}
 	}
 }
@@ -192,12 +197,17 @@ void CSpatialPartition::Render(Vector3* theCameraPosition)
  ********************************************************************************/
 void CSpatialPartition::Update(void)
 {
-	for (int i=0; i<xNumOfGrid; i++)
+	for (auto& entity : GM->G)
 	{
-		for (int j=0; j<yNumOfGrid; j++)
+		if (entity->a)
 		{
-			// Update the Grids
-			theGrid[ i*yNumOfGrid + j ].Update();
+			float dist = (entity->t - player->GetPosition()).LengthSquared();
+			if (dist < entity->rad * entity->rad)
+			{
+				Vector3 dir = (player->GetPosition() - entity->t); dir.y = 0;
+				dir = dir.Normalized();
+				player->Knockback(dir * 50);
+			}
 		}
 	}
 }

@@ -31,16 +31,19 @@ void GManager::Update(float dt)
 	for (int i = 0; i < G.size(); ++i)
 	{
 		if (G[i]->a)
+		{
 			G[i]->Update(dt);
 
-		if (G[i]->id == GOBJ::g_proj) for (int j = 0; j < G.size(); ++j)
-		{
-			if (G[j]->a && G[j]->id != GOBJ::g_proj)
+			if (G[i]->id == GOBJ::g_proj) for (int j = 0; j < G.size(); ++j)
 			{
-				if (Test(G[i], G[j]))
+				if (G[j]->a && G[j]->id != GOBJ::g_proj)
 				{
-					G[i]->a = false;
-					G[j]->a = false;
+					if (Test(G[i], G[j]))
+					{
+						G[i]->a = false;
+						G[j]->a = false;
+						break;
+					}
 				}
 			}
 		}

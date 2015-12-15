@@ -3,7 +3,9 @@
 #include "Grid.h"
 #include "Vector3.h"
 #include "SceneNode.h"
+#include "PlayInfo3PV.h"
 
+class GManager;
 class CSpatialPartition
 {
 public:
@@ -47,4 +49,7 @@ public:
 	int yGridSize;
 	int xNumOfGrid;
 	int yNumOfGrid;
+
+	GManager* GM;
+	CPlayInfo3PV* player;
 };

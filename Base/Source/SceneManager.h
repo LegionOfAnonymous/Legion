@@ -55,6 +55,7 @@ class CSceneManager : public Scene
 		U_COLOR_TEXTURE,
 		U_TEXT_ENABLED,
 		U_TEXT_COLOR,
+		U_SPATIAL,
 		U_TOTAL,
 	};
 	enum GEOMETRY_TYPE
