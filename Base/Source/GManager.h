@@ -20,6 +20,8 @@ public:
 	vector<GOBJ*> G;
 
 	bool Test(GOBJ* a, GOBJ* b);
+
+	int point;
 };
 
 #endif

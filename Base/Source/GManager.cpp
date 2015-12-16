@@ -2,7 +2,7 @@
 #include "Mesh.h"
 #include "GObj.h"
 
-GManager::GManager()
+GManager::GManager() : point(0)
 {
 }
 
@@ -42,6 +42,7 @@ void GManager::Update(float dt)
 					{
 						G[i]->a = false;
 						G[j]->a = false;
+						point++;
 						break;
 					}
 				}

@@ -19,6 +19,7 @@ CSceneManager::CSceneManager(void)
 	, m_window_width(800)
 	, m_window_height(600)
 {
+	showderView.Set(-10.f, 0.f, 0.f);
 }
 
 CSceneManager::CSceneManager(const int m_window_width, const int m_window_height)
@@ -29,6 +30,7 @@ CSceneManager::CSceneManager(const int m_window_width, const int m_window_height
 {
 	this->m_window_width = m_window_width;
 	this->m_window_height = m_window_height;
+	showderView.Set(-10.f, 0.f, 0.f);
 }
 
 CSceneManager::~CSceneManager(void)
@@ -338,6 +340,35 @@ void CSceneManager::Update(double dt)
 	else
 		glUniform1i(m_parameters[U_SPATIAL], false);
 
+	static bool switchV = false;
+	static bool switchV2 = false;
+	if (Application::IsKeyPressed('1') && switchV == false)
+		switchV = true;
+	if (Application::IsKeyPressed('2') && switchV2 == false)
+		switchV2 = true;
+
+	if (switchV)
+	{
+		showderView.x += dt * 200.f;
+
+		if (showderView.x  > 0.f)
+		{
+			showderView.x = 0.f;
+			switchV = false;
+		}
+	}
+
+	if (switchV2)
+	{
+		showderView.x -= dt * 200.f;
+
+		if (showderView.x  < -10.f)
+		{
+			showderView.x = -10.f;
+			switchV2 = false;
+		}
+	}
+
 	rotateAngle -= Application::camera_yaw;// += (float)(10 * dt);
 
 	m_cAvatar->Update(dt);
@@ -628,6 +659,11 @@ void CSceneManager::RenderGUI()
 	ss.precision(5);
 	ss << "FPS: " << fps;
 	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 30, 0, 6);
+
+
+	ostringstream s;
+	s << GM->point;
+	RenderTextOnScreen(meshList[GEO_TEXT], s.str(), Color(0, 1, 0), 32, 0, 60);
 }
 
 /********************************************************************************
@@ -660,11 +696,6 @@ void CSceneManager::RenderMobileObjects()
 void CSceneManager::RenderFixedObjects()
 {
 	RenderMesh(meshList[GEO_AXES], false);
-
-	modelStack.PushMatrix();
-	modelStack.Scale(10, 10, 10);
-	RenderText(meshList[GEO_TEXT], "DM2240 AGDEV", Color(0, 1, 0));
-	modelStack.PopMatrix();
 }
 
 /********************************************************************************
@@ -811,10 +842,11 @@ void CSceneManager::RenderSkybox()
 void CSceneManager::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	Mtx44 perspective;
+	Mtx44 perspective, translation;
+	translation.SetToIdentity(); translation.SetToTranslation(showderView.x, showderView.y, showderView.z);
 	perspective.SetToPerspective(70.0f, 16.0f / 9.0f, 0.1f, 10000.0f);
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
-	projectionStack.LoadMatrix(perspective);
+	projectionStack.LoadMatrix(perspective * translation);
 	
 	// Set up the view
 	viewStack.LoadIdentity();
@@ -829,7 +861,7 @@ void CSceneManager::Render()
 	RenderLights();
 	//RenderGround();
 	//RenderSkybox();
-	//RenderFixedObjects();
+	RenderFixedObjects();
 	//RenderMobileObjects();
 
 	if (m_cSceneGraph)

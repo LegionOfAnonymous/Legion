@@ -4,7 +4,7 @@
 
 // The default camera speed
 static const float CAMERA_SPEED = 200.f;
-static float m_fTPVCameraOffset = 75.f;
+static float m_fTPVCameraOffset = 25.f;
 
 /********************************************************************************
  Constructor

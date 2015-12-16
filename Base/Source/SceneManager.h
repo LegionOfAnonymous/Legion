@@ -166,6 +166,8 @@ private:
 	CPlayInfo3PV* m_cAvatar;
 	CSceneNode* m_cSceneGraph; 
 	CSpatialPartition* m_cSpatialPartition;
+
+	Vector3 showderView;
 };
 
 #endif

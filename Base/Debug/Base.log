@@ -1,9 +1,15 @@
-﻿Build started 15/12/2015 9:36:00 PM.
+﻿Build started 16/12/2015 3:45:32 PM.
      1>Project "C:\Users\hibar_000\Desktop\Legion\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\hibar_000\Desktop\Legion\/Common/Source /IC:\Users\hibar_000\Desktop\Legion\/glew/include /IC:\Users\hibar_000\Desktop\Legion\/glfw/include /I"C:\Program Files (x86)\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SpatialPartition.cpp
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-         SpatialPartition.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\hibar_000\Desktop\Legion\/Common/Source /IC:\Users\hibar_000\Desktop\Legion\/glew/include /IC:\Users\hibar_000\Desktop\Legion\/glfw/include /I"C:\Program Files (x86)\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SceneManager.cpp
+         SceneManager.cpp
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(306): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(352): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(363): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(372): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(398): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(401): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\hibar_000\desktop\legion\base\source\scenemanager.cpp(781): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\hibar_000\Desktop\Legion\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\hibar_000\Desktop\Legion\Debug /LIBPATH:"C:\Users\hibar_000\Desktop\Legion\/glfw/lib-msvc100" /LIBPATH:C:\Users\hibar_000\Desktop\Legion\/glew/lib /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\hibar_000\Desktop\Legion\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\hibar_000\Desktop\Legion\Debug\Base.lib" /MACHINE:X86 Debug\ai.obj
          Debug\Application.obj
@@ -49,4 +55,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.96
+Time Elapsed 00:00:01.35
